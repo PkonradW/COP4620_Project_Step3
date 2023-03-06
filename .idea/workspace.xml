@@ -4,47 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd7e676c-93bb-42cd-a6fb-43ac677105c9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/antlr_4_11_1_complete.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Step3.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Driver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Little.g4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Micro.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SimpleTableBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inputs/test1.micro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inputs/test11.micro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inputs/test13.micro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inputs/test14.micro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inputs/test16.micro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inputs/test18.micro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inputs/test19.micro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inputs/test20.micro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inputs/test21.micro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inputs/test5.micro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inputs/test6.micro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inputs/test7.micro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inputs/test8.micro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inputs/test9.micro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/outputs/test1.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/outputs/test11.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/outputs/test13.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/outputs/test14.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/outputs/test16.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/outputs/test18.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/outputs/test19.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/outputs/test20.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/outputs/test21.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/outputs/test5.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/outputs/test6.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/outputs/test7.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/outputs/test8.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/outputs/test9.out" afterDir="false" />
-    </list>
+    <list default="true" id="cd7e676c-93bb-42cd-a6fb-43ac677105c9" name="Changes" comment="adding most recent changes. Start to coding step3" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,17 +29,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/paytonweakley/Documents/COP4620_Project/Step3/Step3/src&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "/Users/paytonweakley/Documents/COP4620_Project/Step3/Step3/src",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
@@ -94,6 +55,18 @@
       <option name="presentableId" value="Default" />
       <updated>1677524084314</updated>
     </task>
+    <task id="LOCAL-00001" summary="adding most recent changes. Start to coding step3">
+      <created>1678141035126</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678141035126</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="adding most recent changes. Start to coding step3" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding most recent changes. Start to coding step3" />
   </component>
 </project>
