@@ -1,0 +1,50 @@
+Symbol Table GLOBAL
+name closing type STRING value "closing..."
+name minyears type INT
+name maxyears type INT
+name GlobMonthDur type INT
+name GlobMonthRate type FLOAT
+name MonthPayment type FLOAT
+name GlobPrinBal type FLOAT
+name GlobApr type FLOAT
+name GlobSumInterest type FLOAT
+
+Symbol Table main
+name monthDur type INT
+name true type INT
+name monthRate type FLOAT
+name monthPayment type FLOAT
+name prinBal type FLOAT
+name apr type FLOAT
+name sumInterest type FLOAT
+
+Symbol Table BLOCK 1
+
+Symbol Table getUserVals
+name monthDur type INT
+name prinBal type FLOAT
+name apr type FLOAT
+
+Symbol Table BLOCK 2
+
+Symbol Table BLOCK 3
+
+Symbol Table BLOCK 4
+name success value "all good here, just wish we had pointers"
+
+Symbol Table getDuration
+name monthDur type INT
+
+Symbol Table BLOCK 5
+
+Symbol Table BLOCK 6
+
+Symbol Table getMonthlyPayment
+name prinBal type FLOAT
+name monthRate type FLOAT
+name months type INT
+name payment type FLOAT
+name base type FLOAT
+name power type FLOAT
+name top type FLOAT
+name bottom type FLOAT

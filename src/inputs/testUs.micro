@@ -1,0 +1,64 @@
+PROGRAM mortgage
+BEGIN
+    STRING closing := "closing...";
+    INT minyears;
+    INT maxyears;
+    INT GlobMonthDur;
+    FLOAT GlobMonthRate, MonthPayment, GlobPrinBal, GlobApr, GlobSumInterest;
+
+    FUNCTION VOID main()
+    BEGIN
+        INT monthDur, true;
+        FLOAT monthRate, monthPayment, prinBal, apr, sumInterest;
+
+        minyears := 4;
+        maxyears := 30;
+        true := 1;
+
+        WHILE  (getUserVals(monthDur, prinBal, apr) = 1)
+            monthRate := apr / 12;
+            monthPayment := getMonthlyPayment(prinBal, monthRate, monthDur);
+            sumInterest := 0;
+        ENDWHILE
+        WRITE(closing);
+    END -- end main
+
+    FUNCTION INT getUserVals(INT monthDur, FLOAT prinBal, FLOAT apr)
+    BEGIN
+        IF(getDuration(monthDur)!=0)
+            IF(getLoan(prinBal)!=0)
+                IF(getRate(apr)!=0)
+                    STRING success := "all good here, just wish we had pointers";
+                    WRITE(success);
+                    RETURN 1;
+                ENDIF
+            ENDIF
+        ENDIF
+
+        RETURN 0;
+    END --end getUserVals()
+    FUNCTION INT getDuration(INT monthDur)
+    BEGIN
+        READ(monthDur);
+        IF (monthDur*4 > minYears)
+            IF (monthDur*4 < maxYears)
+                globMonthDur := monthDur;
+                RETURN 1;
+            ENDIF
+        ENDIF
+    END
+
+    FUNCTION FLOAT getMonthlyPayment(FLOAT prinBal, FLOAT monthRate, INT months)
+    BEGIN
+        FLOAT payment, base, power, top, bottom;
+
+        base := (1 + monthRate);
+        power := months;
+        top := monthrate * base * power; --TODO calculate correct values
+        bottom := base * power - 1;
+        payment := prinBal * top / bottom;
+
+        RETURN payment;
+    END
+
+END
