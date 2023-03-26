@@ -12,12 +12,15 @@ import java.io.*;
  *
  */
 public class SimpleTableBuilder extends LittleBaseListener{
+    //ArrayList<HashMap<String, Symbol>> = new ArrayList;
     ArrayList<SymbolTable> tableList = new ArrayList<>();
     SymbolTable global = new SymbolTable();
     Stack<SymbolTable> scopeStack = new Stack<>();
+    int blockCounter;
     @Override public void enterProgram(LittleParser.ProgramContext ctx) {
         tableList.add(global);
-        scopeStack.add(global);
+        scopeStack.push(global);
+        global.setName("GLOBAL");
     }
     @Override public void enterString_decl(LittleParser.String_declContext ctx) {
         SymbolTable thisTab = scopeStack.pop(); // get current symbol table
@@ -33,4 +36,13 @@ public class SimpleTableBuilder extends LittleBaseListener{
         scopeStack.push(thisTab);
     }
 
+    /**
+     * for naming tables with generated scope names (while loops, if statements)
+     */
+    public static void blockNamer(SymbolTable block){
+
+    }
+
 }
+
+
