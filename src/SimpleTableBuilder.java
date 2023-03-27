@@ -1,5 +1,4 @@
 import java.util.*;
-import java.io.*;
 /**
  * <p>extending the LittleBaseListener</p>
  * <li>enter program</li>
@@ -11,9 +10,10 @@ import java.io.*;
  *        <li>create method to print all the symbols from all the tables in the order they were created</li>
  *
  */
+
 public class SimpleTableBuilder extends LittleBaseListener{
     //ArrayList<HashMap<String, Symbol>> = new ArrayList;
-    ArrayList<SymbolTable<String,Symbol>> tableList = new ArrayList<>();
+    ArrayList<SymbolTable> tableList = new ArrayList<>();
     SymbolTable global = new SymbolTable();
     // scope stack used to keeping track of which table to add variables to
     // (only add symbols to the topmost table in the stack)
@@ -23,6 +23,7 @@ public class SimpleTableBuilder extends LittleBaseListener{
         tableList.add(global);
         scopeStack.push(global);
         global.setName("GLOBAL");
+        //System.out.println(scopeStack.peek().getName());
         blockCounter = 0;
     }
     /*
@@ -32,6 +33,10 @@ public class SimpleTableBuilder extends LittleBaseListener{
             function blocks
     */
     @Override public void enterIf_stmt(LittleParser.If_stmtContext ctx) {
+        SymbolTable newTable = new SymbolTable();
+        blockNamer(newTable);
+        scopeStack.push(newTable);
+        tableList.add(newTable);
         // make a name for the thing
         // make new symbol table
         // add to scope stack and TableList
@@ -53,17 +58,20 @@ public class SimpleTableBuilder extends LittleBaseListener{
 
     @Override public void enterFunc_decl(LittleParser.Func_declContext ctx) {
         String name = ctx.id().IDENTIFIER().getText();
+        // System.out.println(name);
         SymbolTable thisTable = new SymbolTable();
         thisTable.setName(name);
         scopeStack.push(thisTable);
+        //System.out.println(scopeStack.peek().getName());
         tableList.add(thisTable);
     }
     @Override public void exitFunc_decl(LittleParser.Func_declContext ctx) {
+        scopeStack.pop();
 
     }
 
     @Override public void enterString_decl(LittleParser.String_declContext ctx) {
-        SymbolTable thisTab = scopeStack.pop(); // get current symbol table
+        SymbolTable thisTab = scopeStack.peek(); // get current symbol table
 
         // pull values from tree
         String name = ctx.id().IDENTIFIER().getText();
@@ -72,9 +80,24 @@ public class SimpleTableBuilder extends LittleBaseListener{
 
         // insert new symbol into table and push it back onto the stack
         Symbol newSymbol = new Symbol(name, type, value);
-        thisTab.put(name, newSymbol);
-        scopeStack.push(thisTab);
+        // System.out.println(thisTab.getName());
+        thisTab.table.put(name, newSymbol);
     }
+
+    @Override public void enterParam_decl(LittleParser.Param_declContext ctx) {
+        SymbolTable thisTable = scopeStack.peek();
+
+        String name = ctx.id().IDENTIFIER().getText();
+        String type = ctx.var_type().getText().toString();
+        Symbol thisSymbol = new Symbol(name, type, null);
+
+        thisTable.table.put(name, thisSymbol);
+        System.out.println(name + " " + type + thisTable.getName());
+    }
+
+    // needs var decl rule
+
+
 
 
     /**
@@ -84,6 +107,11 @@ public class SimpleTableBuilder extends LittleBaseListener{
         blockCounter++;
         block.setName("BLOCK" + (blockCounter));
     }
+
+    /*
+    TODO make method that prints all the symbols from all of the tables
+    within tableList
+     */
 
 }
 

@@ -3,8 +3,7 @@
  * @TODO: confirm this is an acceptable implementation
  */
 import java.util.HashMap;
-import java.util.Hashtable;
-public class SymbolTable<String, Symbol> extends HashMap {
+public class SymbolTable {
     public String getName() {
         return name;
     }
@@ -12,6 +11,10 @@ public class SymbolTable<String, Symbol> extends HashMap {
     public void setName(String name) {
         this.name = name;
     }
+    public SymbolTable() {
+        this.table = new HashMap<>();
+    }
 
     private String name;
+    public HashMap<String, Symbol> table;
 }
