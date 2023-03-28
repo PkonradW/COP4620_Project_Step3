@@ -1,5 +1,5 @@
 import java.util.*;
-import java.io.*;
+
 /**
  * <p>extending the LittleBaseListener</p>
  * <li>enter program</li>
@@ -181,11 +181,11 @@ public class SimpleTableBuilder extends LittleBaseListener{
                 }
                 System.out.println("Symbol table " + table.getName());
                 Symbol symbol;
-                Set symbolSet = table.table.entrySet();
-                Iterator i = symbolSet.iterator();
+                Set<Map.Entry<String, Symbol>> symbolSet = table.table.entrySet();
+                Iterator<Map.Entry<String, Symbol>> i = symbolSet.iterator();
                 while (i.hasNext()) {
-                    Map.Entry entry = (Map.Entry) i.next();
-                    String key = (String) entry.getKey();
+                    Map.Entry<String, Symbol> entry = i.next();
+                    String key = entry.getKey();
                     symbol = table.table.get(key);
                     if (symbol != null) {
                         if (symbol.getValue() != null) {
