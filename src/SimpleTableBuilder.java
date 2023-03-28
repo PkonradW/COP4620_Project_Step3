@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 /**
  * <p>extending the LittleBaseListener</p>
  * <li>enter program</li>
@@ -18,13 +19,13 @@ public class SimpleTableBuilder extends LittleBaseListener{
     // scope stack used to keeping track of which table to add variables to
     // (only add symbols to the topmost table in the stack)
     public static Stack<SymbolTable> scopeStack = new Stack<>();
+    public static ArrayList<String> errors = new ArrayList<>();
     public static String currentVarType;
     public static int blockCounter;
     @Override public void enterProgram(LittleParser.ProgramContext ctx) {
         tableList.add(global);
         scopeStack.push(global);
         global.setName("GLOBAL");
-        //System.out.println(scopeStack.peek().getName());
         blockCounter = 0;
     }
     /*
@@ -42,6 +43,17 @@ public class SimpleTableBuilder extends LittleBaseListener{
 
     @Override public void exitIf_stmt(LittleParser.If_stmtContext ctx) {
         // pop off of scope stack
+        scopeStack.pop();
+    }
+    @Override public void enterElse_part(LittleParser.Else_partContext ctx) {
+        if (ctx.decl()!=null) {
+            SymbolTable newTable = new SymbolTable();
+            blockNamer(newTable);
+            scopeStack.push(newTable);
+            tableList.add(newTable);
+        }
+    }
+    @Override public void exitElse_part(LittleParser.Else_partContext ctx) {
         scopeStack.pop();
     }
 
@@ -88,7 +100,12 @@ public class SimpleTableBuilder extends LittleBaseListener{
         // insert new symbol into table and push it back onto the stack
         Symbol newSymbol = new Symbol(name, type, value);
         // System.out.println(thisTab.getName());
-        thisTab.table.put(name, newSymbol);
+        if (!thisTab.table.containsKey(name)) {
+            thisTab.table.put(name, newSymbol);
+        } else {
+            String error = "DECLARATION ERROR " + name;
+            errors.add(error);
+        }
     }
 
     @Override public void enterVar_decl(LittleParser.Var_declContext ctx) {
@@ -99,17 +116,27 @@ public class SimpleTableBuilder extends LittleBaseListener{
         String type = ctx.var_type().getText().toString();
         currentVarType = type;
         String name = (ctx.id_list().id().IDENTIFIER().getText());
-        thisTable.table.put(name, new Symbol(name, type, null));
+        if (!thisTable.table.containsKey(name)) {
+            thisTable.table.put(name, new Symbol(name, type, null));
+        } else {
+            String error = "DECLARATION ERROR " + name;
+            errors.add(error);
+        }
     }
     @Override public void exitVar_decl(LittleParser.Var_declContext ctx) {
         currentVarType = null;
     }
     @Override public void enterId_tail(LittleParser.Id_tailContext ctx) {
         SymbolTable thisTable = scopeStack.peek();
-        if (ctx.id()!=null) {
+        if (ctx.id()!=null && currentVarType!=null) {
             String name = ctx.id().IDENTIFIER().getText();
             String type = currentVarType;
-            thisTable.table.put(name, new Symbol(name, type, null));
+            if (!thisTable.table.containsKey(name)) {
+                thisTable.table.put(name, new Symbol(name, type, null));
+            } else {
+                String error = "DECLARATION ERROR " + name;
+                errors.add(error);
+            }
         }
     }
 
@@ -121,8 +148,13 @@ public class SimpleTableBuilder extends LittleBaseListener{
         String type = ctx.var_type().getText().toString();
         Symbol thisSymbol = new Symbol(name, type, null);
 
-        thisTable.table.put(name, thisSymbol);
-        System.out.println(name + " " + type + thisTable.getName());
+        if (!thisTable.table.containsKey(name)) {
+            thisTable.table.put(name, thisSymbol);
+        } else {
+            String error = "DECLARATION ERROR " + name;
+            errors.add(error);
+        }
+        //System.out.println(name + " " + type + thisTable.getName());
     }
 
 
@@ -134,42 +166,79 @@ public class SimpleTableBuilder extends LittleBaseListener{
      */
     public static void blockNamer(SymbolTable block){
         blockCounter++;
-        block.setName("BLOCK" + (blockCounter));
+        block.setName("BLOCK " + (blockCounter));
     }
 
     /*
     TODO make method that prints all the symbols from all of the tables
     within tableList
      */
-    public static void prettyPrint(){
-        for (SymbolTable table : tableList){
-            System.out.println("Symbol table " + table.getName());
-            for (String name : table.table.keySet()) {
-                Symbol sybil = table.table.get(name);
-                if (sybil.getValue()==null) {
-                    System.out.println("name " + name
-                                     + " type " + sybil.getType()
-                    );
-                } else {
-                    System.out.println("name " + name
-                            + " type " + sybil.getType()
-                            + " value " + sybil.getValue()
-                    );
+    public static void prettyPrint() {
+        if (errors.isEmpty()) {
+            for (SymbolTable table : tableList) {
+                if (!table.getName().equals("GLOBAL")) {
+                    System.out.println();
+                }
+                System.out.println("Symbol table " + table.getName());
+                Symbol symbol;
+                Set symbolSet = table.table.entrySet();
+                Iterator i = symbolSet.iterator();
+                while (i.hasNext()) {
+                    Map.Entry entry = (Map.Entry) i.next();
+                    String key = (String) entry.getKey();
+                    symbol = table.table.get(key);
+                    if (symbol != null) {
+                        if (symbol.getValue() != null) {
+                            System.out.println("name " + symbol.getName() + " type "
+                                    + symbol.getType() + " value " + symbol.getValue());
+                        } else {
+                            System.out.println("name " + symbol.getName() + " type "
+                                    + symbol.getType());
+                        }
+                    }
                 }
             }
-            System.out.println();
+        } else {
+            System.out.println(errors.get(0));
         }
-        /*
-        for each symbolTable in tableList:
-            print "Symbol table <table name>
-            for each symbol in the table:
-                print "name <name> type <type> value <value>"
-                   OR "name <name> type <type>"
+}
 
 
-        make sure to print newlines between different symbol tables
-         */
-    }
+    /*public static void prettyPrint() {
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter("output.txt"));
+            if (errors.isEmpty()) {
+                for (SymbolTable table : tableList) {
+                    if (!table.getName().equals("GLOBAL")) {
+                        writer.println();
+                    }
+                    writer.println("Symbol table " + table.getName());
+                    Symbol symbol;
+                    Set symbolSet = table.table.entrySet();
+                    Iterator i = symbolSet.iterator();
+                    while (i.hasNext()) {
+                        Map.Entry entry = (Map.Entry) i.next();
+                        String key = (String) entry.getKey();
+                        symbol = table.table.get(key);
+                        if (symbol != null) {
+                            if (symbol.getValue() != null) {
+                                writer.println("name " + symbol.getName() + " type "
+                                        + symbol.getType() + " value " + symbol.getValue());
+                            } else {
+                                writer.println("name " + symbol.getName() + " type "
+                                        + symbol.getType());
+                            }
+                        }
+                    }
+                }
+            } else { //endif
+                writer.println(errors.get(0));
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.err.println("Failed to write to file: " + e.getMessage());
+        }
+    } // end prettyPrint*/
 
 }
 

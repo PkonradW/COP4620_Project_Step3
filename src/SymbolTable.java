@@ -3,6 +3,11 @@
  * @TODO: confirm this is an acceptable implementation
  */
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.SynchronousQueue;
+
 public class SymbolTable {
     public String getName() {
         return name;
@@ -12,9 +17,10 @@ public class SymbolTable {
         this.name = name;
     }
     public SymbolTable() {
-        this.table = new HashMap<>();
+        this.table = new LinkedHashMap<String, Symbol>();
     }
 
     private String name;
-    public HashMap<String, Symbol> table;
+    public LinkedHashMap<String, Symbol> table;
+
 }
