@@ -20,14 +20,10 @@ public class Driver {
         ParseTree tree = parser.program();
 
         ParseTreeWalker walker = new ParseTreeWalker () ;
-        SimpleTableBuilder stb = new SimpleTableBuilder (); //Example
-        //SymbolTableBuilder stb = new SymbolTableBuilder ();
-
+        SimpleTableBuilder stb = new SimpleTableBuilder ();
         // Walk the tree created during the parse, trigger callbacks
         walker.walk(stb, tree);
-
-        //stb.prettyPrint();
-
+        stb.prettyPrint();
     }
 
 }

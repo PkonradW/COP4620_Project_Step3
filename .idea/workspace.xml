@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd7e676c-93bb-42cd-a6fb-43ac677105c9" name="Changes" comment="Started writing the code for the TableBuilder">
+    <list default="true" id="cd7e676c-93bb-42cd-a6fb-43ac677105c9" name="Changes" comment="Fixed SymbolTable class, started filling in required methods">
+      <change afterPath="$PROJECT_DIR$/src/test" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Driver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Driver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SimpleTableBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/SimpleTableBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SimpleTableBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SimpleTableBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SymbolTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/SymbolTable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SymbolTable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,13 +112,21 @@
       <option name="project" value="LOCAL" />
       <updated>1679878598821</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fixed SymbolTable class, started filling in required methods">
+      <created>1679938448809</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1679938448809</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adding most recent changes. Start to coding step3" />
     <MESSAGE value="Created the necessary datastructures for the project and started outlining their implementation." />
     <MESSAGE value="Started writing the code for the TableBuilder" />
-    <option name="LAST_COMMIT_MESSAGE" value="Started writing the code for the TableBuilder" />
+    <MESSAGE value="Fixed SymbolTable class, started filling in required methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed SymbolTable class, started filling in required methods" />
   </component>
 </project>
