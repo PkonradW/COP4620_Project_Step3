@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd7e676c-93bb-42cd-a6fb-43ac677105c9" name="Changes" comment="methods filled in, revision 1">
-      <change afterPath="$PROJECT_DIR$/src/badLazy.sh" afterDir="false" />
+    <list default="true" id="cd7e676c-93bb-42cd-a6fb-43ac677105c9" name="Changes" comment="it done, fixed the warnings">
+      <change afterPath="$PROJECT_DIR$/src/inputs/group23.micro" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Driver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Driver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SimpleTableBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/SimpleTableBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SimpleTableBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SimpleTableBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SymbolTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/SymbolTable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SymbolTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/inputs/testUs.micro" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +44,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "/Users/paytonweakley/Documents/COP4620_Project/Step3/Step3/src",
+    "last_opened_file_path": "/Users/paytonweakley/Documents/COP4620_Project/Step3/Step3/src/inputs",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -58,8 +53,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/inputs" />
+      <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
   <component name="RunManager">
@@ -130,7 +125,21 @@
       <option name="project" value="LOCAL" />
       <updated>1679964695103</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="it done, ignore the 18 warnings">
+      <created>1679975478127</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679975478127</updated>
+    </task>
+    <task id="LOCAL-00009" summary="it done, fixed the warnings">
+      <created>1679975695878</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679975695878</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -139,6 +148,9 @@
     <MESSAGE value="Started writing the code for the TableBuilder" />
     <MESSAGE value="Fixed SymbolTable class, started filling in required methods" />
     <MESSAGE value="methods filled in, revision 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="methods filled in, revision 1" />
+    <MESSAGE value="it done" />
+    <MESSAGE value="it done, ignore the 18 warnings" />
+    <MESSAGE value="it done, fixed the warnings" />
+    <option name="LAST_COMMIT_MESSAGE" value="it done, fixed the warnings" />
   </component>
 </project>

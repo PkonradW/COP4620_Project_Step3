@@ -1,5 +1,5 @@
 import java.util.*;
-
+import java.io.*;
 /**
  * <p>extending the LittleBaseListener</p>
  * <li>enter program</li>
@@ -28,12 +28,7 @@ public class SimpleTableBuilder extends LittleBaseListener{
         global.setName("GLOBAL");
         blockCounter = 0;
     }
-    /*
-        make new symbol tables for:
-            if blocks
-            while blocks
-            function blocks
-    */
+
     @Override public void enterIf_stmt(LittleParser.If_stmtContext ctx) {
         SymbolTable newTable = new SymbolTable();
         blockNamer(newTable);
@@ -41,10 +36,6 @@ public class SimpleTableBuilder extends LittleBaseListener{
         tableList.add(newTable);
     }
 
-    @Override public void exitIf_stmt(LittleParser.If_stmtContext ctx) {
-        // pop off of scope stack
-        scopeStack.pop();
-    }
     @Override public void enterElse_part(LittleParser.Else_partContext ctx) {
         if (ctx.decl()!=null) {
             SymbolTable newTable = new SymbolTable();
@@ -78,11 +69,9 @@ public class SimpleTableBuilder extends LittleBaseListener{
      */
     @Override public void enterFunc_decl(LittleParser.Func_declContext ctx) {
         String name = ctx.id().IDENTIFIER().getText();
-        // System.out.println(name);
         SymbolTable thisTable = new SymbolTable();
         thisTable.setName(name);
         scopeStack.push(thisTable);
-        //System.out.println(scopeStack.peek().getName());
         tableList.add(thisTable);
     }
     @Override public void exitFunc_decl(LittleParser.Func_declContext ctx) {
@@ -99,7 +88,6 @@ public class SimpleTableBuilder extends LittleBaseListener{
 
         // insert new symbol into table and push it back onto the stack
         Symbol newSymbol = new Symbol(name, type, value);
-        // System.out.println(thisTab.getName());
         if (!thisTab.table.containsKey(name)) {
             thisTab.table.put(name, newSymbol);
         } else {
@@ -122,24 +110,33 @@ public class SimpleTableBuilder extends LittleBaseListener{
             String error = "DECLARATION ERROR " + name;
             errors.add(error);
         }
+        // pass id_tail context to resursive decl
+        if (ctx.id_list().id_tail().children!=null) {
+            resursiveDecl(type, ctx.id_list().id_tail());
+        }
+    }
+
+    /**
+     * Recursive variable declarations stuff like:
+     * <li>INT x, y, z;</li>
+     * @param ctx id_tail context, confirmed not null by caller
+     */
+    public void resursiveDecl(String type, LittleParser.Id_tailContext ctx){
+        String name = ctx.id().IDENTIFIER().getText();
+        SymbolTable thisTable = scopeStack.peek();
+        if (!thisTable.table.containsKey(name)) {
+            thisTable.table.put(name, new Symbol(name, type, null));
+        } else {
+            String error = "DECLARATION ERROR " + name;
+            errors.add(error);
+        }
+        if (ctx.id_tail().children != null) {
+            resursiveDecl(type, ctx.id_tail());
+        }
     }
     @Override public void exitVar_decl(LittleParser.Var_declContext ctx) {
         currentVarType = null;
     }
-    @Override public void enterId_tail(LittleParser.Id_tailContext ctx) {
-        SymbolTable thisTable = scopeStack.peek();
-        if (ctx.id()!=null && currentVarType!=null) {
-            String name = ctx.id().IDENTIFIER().getText();
-            String type = currentVarType;
-            if (!thisTable.table.containsKey(name)) {
-                thisTable.table.put(name, new Symbol(name, type, null));
-            } else {
-                String error = "DECLARATION ERROR " + name;
-                errors.add(error);
-            }
-        }
-    }
-
 
     @Override public void enterParam_decl(LittleParser.Param_declContext ctx) {
         SymbolTable thisTable = scopeStack.peek();
@@ -154,7 +151,6 @@ public class SimpleTableBuilder extends LittleBaseListener{
             String error = "DECLARATION ERROR " + name;
             errors.add(error);
         }
-        //System.out.println(name + " " + type + thisTable.getName());
     }
 
 
@@ -173,38 +169,37 @@ public class SimpleTableBuilder extends LittleBaseListener{
     TODO make method that prints all the symbols from all of the tables
     within tableList
      */
-    public static void prettyPrint() {
-        if (errors.isEmpty()) {
-            for (SymbolTable table : tableList) {
-                if (!table.getName().equals("GLOBAL")) {
-                    System.out.println();
-                }
-                System.out.println("Symbol table " + table.getName());
-                Symbol symbol;
-                Set<Map.Entry<String, Symbol>> symbolSet = table.table.entrySet();
-                Iterator<Map.Entry<String, Symbol>> i = symbolSet.iterator();
-                while (i.hasNext()) {
-                    Map.Entry<String, Symbol> entry = i.next();
-                    String key = entry.getKey();
-                    symbol = table.table.get(key);
-                    if (symbol != null) {
-                        if (symbol.getValue() != null) {
-                            System.out.println("name " + symbol.getName() + " type "
-                                    + symbol.getType() + " value " + symbol.getValue());
-                        } else {
-                            System.out.println("name " + symbol.getName() + " type "
-                                    + symbol.getType());
-                        }
-                    }
-                }
-            }
-        } else {
-            System.out.println(errors.get(0));
-        }
-}
+//    public void prettyPrint() {
+//        if (errors.isEmpty()) {
+//            for (SymbolTable table : tableList) {
+//                if (!table.getName().equals("GLOBAL")) {
+//                    System.out.println();
+//                }
+//                System.out.println("Symbol table " + table.getName());
+//                Symbol symbol;
+//                Set<Map.Entry<String, Symbol>> symbolSet = table.table.entrySet();
+//                Iterator<Map.Entry<String, Symbol>> i = symbolSet.iterator();
+//                while (i.hasNext()) {
+//                    Map.Entry<String, Symbol> entry = i.next();
+//                    String key = entry.getKey();
+//                    symbol = table.table.get(key);
+//                    if (symbol != null) {
+//                        if (symbol.getValue() != null) {
+//                            System.out.println("name " + symbol.getName() + " type "
+//                                    + symbol.getType() + " value " + symbol.getValue());
+//                        } else {
+//                            System.out.println("name " + symbol.getName() + " type "
+//                                    + symbol.getType());
+//                        }
+//                    }
+//                }
+//            }
+//        } else {
+//            System.out.println(errors.get(0));
+//        }
 
 
-    /*public static void prettyPrint() {
+    public void prettyPrint() {
         try {
             PrintWriter writer = new PrintWriter(new FileWriter("output.txt"));
             if (errors.isEmpty()) {
@@ -238,7 +233,7 @@ public class SimpleTableBuilder extends LittleBaseListener{
         } catch (IOException e) {
             System.err.println("Failed to write to file: " + e.getMessage());
         }
-    } // end prettyPrint*/
+    } // end prettyPrint
 
 }
 
